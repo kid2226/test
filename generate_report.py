@@ -350,9 +350,9 @@ def make_charts():
     for label in ax.get_yticklabels():
         label.set_fontproperties(FONT)
     for bar, v in zip(bars, values[::-1]):
-        ax.text(v - 0.5, bar.get_y() + bar.get_height()/2, f"{v:.1f}%", va="center", ha="right", color="white", fontsize=9, fontproperties=FONT)
+        ax.text(v + 0.5, bar.get_y() + bar.get_height()/2, f"{v:.1f}%", va="center", ha="left", color="white", fontsize=9, fontproperties=FONT)
     fig.tight_layout()
-    p2 = CHARTS / "china_2026h1_indicators.png"
+    p2 = CHARTS / "china_2026m7_indicators.png"
     fig.savefig(p2, dpi=220, bbox_inches="tight")
     plt.close(fig)
 
