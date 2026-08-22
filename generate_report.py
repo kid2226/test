@@ -928,8 +928,10 @@ def build_report():
     update_fields.set(qn("w:val"), "true")
 
     path = OUT / "中国房地产市场发展研究报告_2026-2030.docx"
+    ascii_path = OUT / "china-real-estate-market-report-2026-2030.docx"
     doc.save(path)
-    return path
+    doc.save(ascii_path)
+    return ascii_path
 
 
 if __name__ == "__main__":
