@@ -67,13 +67,6 @@ def set_repeat_table_header(row):
     tr_pr.append(tbl_header)
 
 
-def set_repeat_table_header(row):
-    tr_pr = row._tr.get_or_add_trPr()
-    tbl_header = OxmlElement("w:tblHeader")
-    tbl_header.set(qn("w:val"), "true")
-    tr_pr.append(tbl_header)
-
-
 def set_keep_with_next(paragraph, value=True):
     p_pr = paragraph._p.get_or_add_pPr()
     keep = p_pr.find(qn("w:keepNext"))
@@ -81,13 +74,6 @@ def set_keep_with_next(paragraph, value=True):
         keep = OxmlElement("w:keepNext")
         p_pr.append(keep)
     keep.set(qn("w:val"), "1" if value else "0")
-
-
-def set_repeat_table_header(row):
-    tr_pr = row._tr.get_or_add_trPr()
-    tbl_header = OxmlElement("w:tblHeader")
-    tbl_header.set(qn("w:val"), "true")
-    tr_pr.append(tbl_header)
 
 
 def set_table_borders(table, color="D0D5DD", size="4"):
@@ -309,9 +295,9 @@ def add_picture(doc, path, title, source, width=Inches(6.35)):
 
 def choose_font():
     candidates = [
+        "/usr/share/fonts/opentype/noto/NotoSansCJK-Regular.ttc",
         "/usr/share/fonts/truetype/noto/NotoSansCJK-Regular.ttc",
         "/usr/share/fonts/truetype/noto/NotoSans-Regular.ttf",
-        "/usr/share/fonts/opentype/noto/NotoSansCJK-Regular.ttc",
     ]
     for p in candidates:
         if Path(p).exists():
