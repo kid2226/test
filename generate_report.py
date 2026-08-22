@@ -163,6 +163,8 @@ def setup_styles(doc):
 
 
 def configure_page(section):
+    section.page_width = Cm(21.0)
+    section.page_height = Cm(29.7)
     section.top_margin = Cm(2.15)
     section.bottom_margin = Cm(1.9)
     section.left_margin = Cm(2.2)
