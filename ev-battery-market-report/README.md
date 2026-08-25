@@ -6,7 +6,15 @@
 
 主报告（中文）：
 
-- [研究报告_电动汽车电池市场投资分析.md](./研究报告_电动汽车电池市场投资分析.md)
+- Word：[output/电动汽车电池市场投资分析.docx](./output/电动汽车电池市场投资分析.docx)
+- Markdown：[研究报告_电动汽车电池市场投资分析.md](./研究报告_电动汽车电池市场投资分析.md)
+
+重新导出 Word：
+
+```bash
+python3 -m pip install -r ev-battery-market-report/requirements.txt
+python3 ev-battery-market-report/scripts/md_to_docx.py
+```
 
 报告结合 2026 年 8 月前后的公开数据，重点回答：
 
