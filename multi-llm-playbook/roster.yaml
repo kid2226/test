@@ -1,0 +1,146 @@
+# 席位配置（给未来自动化用）
+# 按你实际开通的账号增删。名称是逻辑席位，不是必须绑定某一版号。
+
+version: 1
+updated: 2026-09-07
+principle: >
+  默认单模型。L3+ 才并行。并行必须异源（不同公司，尽量不同国家）。
+  合成器不要用第一轮里最能说的那一家。
+
+# 可用模型目录
+catalog:
+  claude:
+    vendor: Anthropic
+    country: US
+    strengths: [code, agent, careful_writing, review]
+    weak: [cheap_bulk, breaking_news]
+  gpt:
+    vendor: OpenAI
+    country: US
+    strengths: [general_reason, tools, science, structured_output]
+    weak: [extreme_cost_efficiency]
+  gemini:
+    vendor: Google
+    country: US
+    strengths: [long_context, multimodal, google_ecosystem]
+    weak: [needle_in_haystack_needs_spotcheck]
+  grok:
+    vendor: xAI
+    country: US
+    strengths: [realtime, direct_style]
+    weak: [formal_compliance]
+  deepseek:
+    vendor: DeepSeek
+    country: CN
+    strengths: [reason, code, cost, open_weights]
+    weak: [product_ux, some_current_affairs_policy]
+  qwen:
+    vendor: Alibaba
+    country: CN
+    strengths: [zh, multimodal, enterprise_maas, long_doc]
+    weak: [colloquial_short_copy_vs_doubao]
+  kimi:
+    vendor: Moonshot
+    country: CN
+    strengths: [ultra_long_doc, research, contracts]
+    weak: [smalltalk]
+  glm:
+    vendor: Zhipu
+    country: CN
+    strengths: [agent, gov_enterprise, private_deploy]
+    weak: [consumer_entertainment]
+  doubao:
+    vendor: ByteDance
+    country: CN
+    strengths: [zh_voice, short_copy, everyday_search]
+    weak: [deep_academic_reason]
+  ernie:
+    vendor: Baidu
+    country: CN
+    strengths: [gov_enterprise, search, compliance]
+    weak: [best_code_engine]
+  hunyuan:
+    vendor: Tencent
+    country: CN
+    strengths: [wechat_wecom_ecosystem]
+    weak: [pure_model_arena]
+  minimax:
+    vendor: MiniMax
+    country: CN
+    strengths: [speech, video, multimodal_gen]
+    weak: [serious_reason_engine]
+  mistral:
+    vendor: Mistral
+    country: FR
+    strengths: [eu_languages, apache_license, data_sovereignty]
+    weak: [frontier_science_vs_us_cn_reasoners]
+  cohere:
+    vendor: Cohere
+    country: CA
+    strengths: [rag, citations, enterprise_search]
+    weak: [creative_consumer_chat]
+  hyperclova:
+    vendor: Naver
+    country: KR
+    strengths: [korean, local_search]
+    weak: [global_code_sota]
+  falcon:
+    vendor: TII
+    country: AE
+    strengths: [arabic, sovereign_open]
+    weak: [general_frontier_chat]
+
+# 任务 → 主引擎
+fast_route:
+  code: claude
+  reason: deepseek
+  zh_short: doubao
+  zh_long: kimi
+  en_long: claude
+  multimodal: gemini
+  realtime: grok
+  cn_policy_industry: qwen
+  eu_compliance: mistral
+  rag: cohere
+  kr_local: hyperclova
+  ar_local: falcon
+
+# 默认议会
+councils:
+  default_3:
+    seats: [claude, deepseek, gemini]
+    synthesizer: gpt
+    note: 美中 + 第三源；GPT 不参加第一轮，只合成
+  code_review:
+    seats: [claude, gpt, deepseek]
+    synthesizer: human
+  china_industry:
+    seats: [qwen, deepseek, claude]
+    synthesizer: human
+    note: 国内两席 + 国际对照
+  investment_research:
+    seats: [kimi, deepseek, gpt]
+    synthesizer: human
+    must_human_final: true
+  creative_copy:
+    seats: [doubao, claude, grok]
+    synthesizer: none
+    note: 不要合成，三列并排
+  eu_business:
+    seats: [mistral, claude, qwen]
+    synthesizer: human
+  multimodal_product:
+    seats: [gemini, qwen, claude]
+    synthesizer: human
+
+# 何时升级到 5 席：L4、跨文化、或 3 席仍严重分歧
+upgrade_to_5:
+  add: [local_country_model, devil_advocate]
+
+policies:
+  isolate_round_one: true
+  no_same_vendor_council: true
+  default_parallel: false
+  l4_requires_human: true
+  timeout_seconds: 120
+  min_returned_seats: 3
